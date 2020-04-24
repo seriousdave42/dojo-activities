@@ -523,4 +523,6 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+appsettings.json
+
 # End of https://www.gitignore.io/api/csharp,windows,dotnetcore,aspnetcore,visualstudiocode
