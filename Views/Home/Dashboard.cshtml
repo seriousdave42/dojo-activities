@@ -1,0 +1,45 @@
+@using BeltExam.Models;
+@model User;
+
+<div class="row justify-content-between">
+    <h1 class="col-6">Dojo Activity Center</h1>
+    <h3 class="col-3">Welcome, @ViewBag.UserName</h3>
+    <a asp-action="Logout">Log Out</a>
+</div>
+
+<table class="table table-striped">
+    <thead class="thead-dark">
+        <th scope="col">Activity</th>
+        <th scope="col">Date</th>
+        <th scope="col">Duration</th>
+        <th scope="col">Coordinator</th>
+        <th scope="col">Particpants</th>
+        <th scope="col">Action</th>
+    </thead>
+    <tbody>
+    @foreach (Campaign c in ViewBag.AllCampaigns)
+    {
+        <tr>
+            <td><a asp-action="SingleCampaign" asp-route-campaignId="@c.CampaignId">@c.Title</a></td>
+            <td>@c.Date.ToString("MMMM dd, yyyy @ hh:mm tt")</td>
+            <td>@c.Duration</td>
+            <td>@c.Planner.FirstName @c.Planner.LastName</td>
+            <td>@c.Attendees.Count</td>
+            @if (Model.RSVPs.Any(p => p.RSVP.CampaignId == c.CampaignId))
+            {
+                <td><a asp-action="unrsvp" asp-route-userId="@Model.UserId" asp-route-campaignId="@c.CampaignId" asp-route-source="dash">Leave</a></td>
+            }
+            else if (Model.CampaignsPlanned.Any(cp => cp.CampaignId == c.CampaignId))
+            {
+                <td><a asp-action="cancel" asp-route-campaignId="@c.CampaignId">Cancel</a></td>
+            }
+            else
+            {
+                <td><a asp-action="rsvp" asp-route-userId="@Model.UserId" asp-route-campaignId="@c.CampaignId" asp-route-source="dash">Join</a></td>
+            }
+        </tr>
+    }
+    </tbody>
+</table>
+
+<a asp-action="Campaign" class="btn btn-primary">Add New Activity</a>

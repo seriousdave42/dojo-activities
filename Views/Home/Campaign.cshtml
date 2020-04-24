@@ -1,0 +1,37 @@
+@using BeltExam.Models;
+@model Campaign;
+
+<div class="row justify-content-between">
+    <h1 class="col-6">Dojo Activity Center</h1>
+    <a asp-action="Dashboard">Dashboard</a>
+    <a asp-action="Logout">Log Out</a>
+</div>
+
+
+<div class="col-5">
+    <h2>Create an Activity</h2><br>
+    <form asp-action="NewCampaign" method="post">
+        <div class="form-group">
+            <span asp-validation-for="Title" class="text-danger"></span><br>
+            <label asp-for="Title"></label>
+            <input asp-for="Title" class="form-control">
+        </div>
+        <div class="form-group">
+            <span asp-validation-for="Date" class="text-danger"></span><br>
+            <label asp-for="Date"></label>
+            <input asp-for="Date" class="form-control">
+        </div>
+        <div class="form-group">
+            <span asp-validation-for="Duration" class="text-danger"></span><br>
+            <label asp-for="Duration"></label>
+            <input asp-for="Duration" class="form-control">
+        </div>
+        <div class="form-group">
+            <span asp-validation-for="Description" class="text-danger"></span><br>
+            <label asp-for="Description"></label>
+            <input asp-for="Description" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary">Create Activity</button>
+    </form>
+</div>
+
